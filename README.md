@@ -57,9 +57,9 @@ A small pill sits at the top center of your screen, showing the time, the temper
 | **Clipboard** | Searchable history of text and images, with All/Text/Images/Pinned filters and a preview pane. **Enter** pastes into the app you were using, **Ctrl D** copies, **Ctrl P** pins and **Del** removes. Pinned items are never trimmed. |
 | **Apps** | Type a few letters and press Enter to launch. Finds Start Menu apps on Windows, `.app` bundles on macOS, and `.desktop` entries on Linux (including Flatpak and Snap). Apps you use most move to the front. |
 | **Wallpaper** | Eight original landscapes drawn by Atoll at your screen's exact resolution, an optional new one every day, or any image of your own. |
-| **Ask** | Ask a question and optionally include your screen. **Ctrl Shift A** takes a screenshot of what you're looking at *before* the panel opens, so the answer is about your work, not about Atoll. |
+| **Ask** | Type a question, or hold the mic button and ask it out loud, and optionally include your screen. **Ctrl Shift A** takes a screenshot of what you're looking at *before* the panel opens, so the answer is about your work, not about Atoll. |
 | **Dictation** | Hold **Ctrl Shift D** anywhere, talk, and let go. Atoll removes filler words, applies spoken corrections ("Tuesday, no, Thursday") and types the clean text where your cursor is. Needs the Gemini option. |
-| **Settings** | AI provider, shortcuts (any key combination), clipboard size, weather city, °C or °F, and 12- or 24-hour time. |
+| **Settings** | AI provider and the assistant's personality, shortcuts (any key combination), clipboard size, weather city, °C or °F, and 12- or 24-hour time. |
 
 Atoll is built with [Tauri 2](https://tauri.app): a Rust core with your system's own webview, so it doesn't ship a whole browser.
 
@@ -103,10 +103,10 @@ This compares Atoll with Hitodama, the paid Windows island shown in a recent vir
 | Wallpaper switcher | ✅ original generated art | ✅ |
 | Media and power controls | ✅ | ✅ |
 | Weather, week view, to-dos, timer | ✅ | ✅ |
-| Ask about your screen | ✅ whole screen, typed question | ✅ circle a region, spoken question |
+| Ask about your screen | ✅ whole screen, typed or spoken question | ✅ circle a region, spoken question |
 | Dictation that cleans up speech | ✅ | ✅ |
 | Routines and scheduled searches | ❌ not yet | ✅ |
-| Custom assistant personality | ❌ | ✅ |
+| Custom assistant personality | ✅ | ✅ |
 
 ## Privacy
 

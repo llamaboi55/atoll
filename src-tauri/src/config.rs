@@ -15,6 +15,8 @@ pub struct Config {
     pub gemini_model: String,
     pub ollama_url: String,
     pub ollama_model: String,
+    /// Free text the user writes to shape how the assistant answers ("dry and funny", "reply in Spanish").
+    pub ai_personality: String,
     pub clip_limit: usize,
     pub clip_paused: bool,
     pub toggle_shortcut: String,
@@ -30,6 +32,7 @@ impl Default for Config {
             gemini_model: "gemini-2.5-flash".into(),
             ollama_url: "http://localhost:11434".into(),
             ollama_model: "gemma3".into(),
+            ai_personality: String::new(),
             clip_limit: 500,
             clip_paused: false,
             toggle_shortcut: "CommandOrControl+Shift+Space".into(),

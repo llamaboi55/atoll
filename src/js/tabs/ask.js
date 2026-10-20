@@ -133,6 +133,32 @@ export const ask = {
       dictated: h('div', { class: 'answer small muted' }, 'Hold the button and talk. Clean text appears here.'),
     };
     els.send.addEventListener('click', send);
+    // Ask by voice: hold, ask out loud, let go. The question is written into the box and sent.
+    const voice = iconButton('mic', 'Hold to ask out loud', () => {}, { class: 'ghost' });
+    voice.addEventListener('pointerdown', async () => {
+      voice.classList.add('live');
+      await dictateDown();
+    });
+    const askAloud = async () => {
+      if (!voice.classList.contains('live')) return;
+      voice.classList.remove('live');
+      els.answer.textContent = 'Listening back…';
+      els.answer.classList.add('muted');
+      try {
+        const text = await stopRecording();
+        if (!text) {
+          els.answer.textContent = 'Didn\'t catch that. Hold a little longer.';
+          return;
+        }
+        els.input.value = text;
+        send();
+      } catch (e) {
+        els.answer.textContent = String(e);
+      }
+    };
+    voice.addEventListener('pointerup', askAloud);
+    voice.addEventListener('pointerleave', askAloud);
+    els.voice = voice;
     els.input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) send();
     });
@@ -160,7 +186,7 @@ export const ask = {
       h('div', { class: 'ask-grid' },
         h('div', { class: 'card' },
           els.status, els.input,
-          h('div', { class: 'row' }, h('label', { class: 'check-label' }, els.screen, icon('screen'), 'Include my screen'), h('span', { class: 'grow' }), h('small', { class: 'muted' }, 'Ctrl Enter'), els.send),
+          h('div', { class: 'row' }, h('label', { class: 'check-label' }, els.screen, icon('screen'), 'Include my screen'), h('span', { class: 'grow' }), h('small', { class: 'muted' }, 'Ctrl Enter'), els.voice, els.send),
           h('div', { class: 'answer-wrap' }, els.answer, iconButton('copy', 'Copy answer', () => navigator.clipboard.writeText(els.answer.textContent).then(() => toast('Copied')), { class: 'ghost corner' }))),
         h('div', { class: 'card' },
           h('h3', {}, 'Dictation'),
