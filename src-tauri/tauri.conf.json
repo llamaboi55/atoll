@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Atoll",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "identifier": "io.github.llamaboi55.atoll",
   "build": {
     "frontendDist": "../src"
@@ -39,7 +39,11 @@
     "longDescription": "Atoll is a free, open-source island for your desktop: clock, focus timer, clipboard history, system stats, app launcher, media and power controls, wallpapers, and optional AI with your own Gemini key or local Ollama.",
     "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
     "macOS": {
-      "minimumSystemVersion": "11.0"
+      "minimumSystemVersion": "11.0",
+      "signingIdentity": "-"
+    },
+    "windows": {
+      "nsis": { "installMode": "currentUser" }
     },
     "linux": {
       "deb": { "depends": [] }
