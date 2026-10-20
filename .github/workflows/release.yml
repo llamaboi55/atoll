@@ -18,11 +18,11 @@ jobs:
             args: ''
           - os: macos-latest
             args: '--target universal-apple-darwin'
-          - os: ubuntu-22.04
+          - os: ubuntu-24.04
             args: ''
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Linux packages
         if: runner.os == 'Linux'
         run: |
@@ -35,7 +35,7 @@ jobs:
       - uses: swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - run: npm install

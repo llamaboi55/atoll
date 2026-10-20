@@ -9,10 +9,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-latest]
+        os: [ubuntu-24.04, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Linux packages
         if: runner.os == 'Linux'
         run: |

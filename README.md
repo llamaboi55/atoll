@@ -25,7 +25,7 @@ Free and open source. No account, no ads, no paywall.
 |---|---|
 | Windows 10/11 | `Atoll_x.y.z_x64-setup.exe` (or the `.msi`) |
 | macOS 11+ (Apple silicon and Intel) | `Atoll_x.y.z_universal.dmg` |
-| Linux | `.AppImage` (any distro), `.deb` (Debian, Ubuntu) or `.rpm` (Fedora, openSUSE) |
+| Linux (Ubuntu 24.04+, Debian 13+, Fedora 40+ or similar) | `.AppImage`, `.deb` or `.rpm` |
 
 The builds aren't code-signed yet, because signing certificates cost money and Atoll is free. Here's what to do the first time you open it:
 - **Windows:** if SmartScreen appears, click *More info*, then *Run anyway*.
