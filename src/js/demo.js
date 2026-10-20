@@ -51,6 +51,7 @@ export async function demo(cmd, args) {
     case 'current_wallpaper': return null;
     case 'ai_ask':
       await new Promise((r) => setTimeout(r, 900));
+      if (/fan|hot|slow/i.test(args.prompt)) return 'Your CPU is working hard, mostly because of Firefox: 14 processes using 2.1 GB of memory. A video or heavy page in a background tab is the usual cause. Close the tabs you are not using and the fan should calm down within a minute.';
       return 'That error means the port is already taken. Another dev server is still running on 5173. Stop it with Ctrl+C in its terminal, or start this one on a different port with `--port 5174`.';
     case 'ai_transcribe': return 'Pick up the train tickets on Thursday.';
     default: return null;

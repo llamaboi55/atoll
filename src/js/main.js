@@ -23,7 +23,8 @@ let expanded = false;
 const params = new URLSearchParams(location.search);
 if (!native) {
   document.documentElement.classList.add('preview');
-  document.body.style.backgroundImage = `url("${sceneDataUrl(params.get('scene') || 'moss-valley')}")`;
+  if (params.has('stage')) document.documentElement.classList.add('stage');
+  else document.body.style.backgroundImage = `url("${sceneDataUrl(params.get('scene') || 'moss-valley')}")`;
 }
 
 for (const tab of TABS) {

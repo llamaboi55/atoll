@@ -27,7 +27,8 @@ async function apply(scene, quiet = false) {
   try {
     const pngBase64 = await renderPng(scene);
     await call('set_wallpaper_png', { name: scene.id, pngBase64 });
-    if (!native) document.body.style.backgroundImage = `url("${sceneDataUrl(scene)}")`;
+    if (!native && document.documentElement.classList.contains('stage')) window.parent.postMessage({ wallpaper: scene.id }, '*');
+    else if (!native) document.body.style.backgroundImage = `url("${sceneDataUrl(scene)}")`;
     set({ wallpaperCurrent: scene.id });
     if (!quiet) toast(`Wallpaper set to ${scene.name}`);
   } catch (e) {
