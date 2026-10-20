@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d2a26"/><stop offset="1" stop-color="#0f1614"/></linearGradient>
+    <radialGradient id="lagoon" cx="0.45" cy="0.42" r="0.6"><stop offset="0" stop-color="#a9e3dc"/><stop offset="1" stop-color="#4fa59e"/></radialGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f6f73"/><stop offset="1" stop-color="#1b4a52"/></linearGradient>
+  </defs>
+  <rect x="64" y="64" width="896" height="896" rx="210" fill="url(#bg)"/>
+  <circle cx="512" cy="512" r="330" fill="url(#sea)"/>
+  <circle cx="512" cy="512" r="262" fill="none" stroke="#e6c79c" stroke-width="92"/>
+  <circle cx="512" cy="512" r="262" fill="none" stroke="#8fbf9a" stroke-width="56" stroke-dasharray="300 70 190 60 260 90" stroke-linecap="round"/>
+  <circle cx="512" cy="512" r="208" fill="url(#lagoon)"/>
+  <ellipse cx="450" cy="440" rx="70" ry="26" fill="#ffffff" opacity="0.25"/>
+</svg>

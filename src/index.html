@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atoll</title>
+  <link rel="stylesheet" href="css/atoll.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <div id="island" class="collapsed">
+    <button id="pill" type="button" aria-label="Open Atoll">
+      <span class="pill-mark" aria-hidden="true"></span>
+      <span id="pill-time" class="pill-time"></span>
+      <span id="pill-extra" class="pill-extra"></span>
+    </button>
+    <section id="panel" aria-label="Atoll">
+      <header class="panel-head">
+        <nav id="tabs" role="tablist"></nav>
+        <span id="head-time" class="head-time"></span>
+      </header>
+      <div id="views"></div>
+    </section>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

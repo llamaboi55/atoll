@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Atoll",
+  "version": "1.0.0",
+  "identifier": "io.github.llamaboi55.atoll",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "island",
+        "title": "Atoll",
+        "url": "index.html",
+        "width": 260,
+        "height": 52,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false,
+        "focus": false,
+        "visible": false,
+        "visibleOnAllWorkspaces": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: asset: http://asset.localhost; connect-src ipc: http://ipc.localhost https://api.open-meteo.com https://geocoding-api.open-meteo.com; media-src 'self' blob:"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Utility",
+    "shortDescription": "A calm island at the top of your screen.",
+    "longDescription": "Atoll is a free, open-source island for your desktop: clock, focus timer, clipboard history, system stats, app launcher, media and power controls, wallpapers, and optional AI with your own Gemini key or local Ollama.",
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
+    "macOS": {
+      "minimumSystemVersion": "11.0"
+    },
+    "linux": {
+      "deb": { "depends": [] }
+    }
+  },
+  "plugins": {}
+}
