@@ -1,5 +1,7 @@
 import { h, icon, iconButton, toast } from '../h.js';
 import { call } from '../api.js';
+import { get, onChange } from '../prefs.js';
+import * as routines from '../routines.js';
 
 let els;
 let ctx;
@@ -86,6 +88,48 @@ export async function dictateUp() {
   } catch (e) {
     toast(String(e));
   }
+}
+
+// ---------- Routines: questions asked on their own every day at a set time.
+function paintRoutines() {
+  const list = get().routines;
+  els.routineList.replaceChildren(
+    ...list.map((r) => h('li', {},
+      h('span', { class: 'time' }, r.time),
+      h('span', { class: 'grow' }, r.prompt),
+      iconButton('play', 'Run now', () => routines.run(r), { class: 'ghost' }),
+      iconButton('x', 'Remove', () => routines.remove(r.id), { class: 'ghost' }))),
+  );
+  if (!list.length) els.routineList.append(h('li', { class: 'empty muted' }, 'No routines yet. Try 08:00 and "summarize today\'s weather and my to-dos".'));
+}
+
+function showRoutineAnswer() {
+  const a = get().routineAnswer;
+  if (!a) return;
+  els.answer.textContent = `${a.prompt} · ${new Date(a.at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n${a.text}`;
+  els.answer.classList.toggle('muted', Boolean(a.error));
+}
+
+function routineCard() {
+  const time = h('input', { type: 'time', value: '08:00', 'aria-label': 'Time' });
+  const prompt = h('input', { type: 'text', placeholder: 'Summarize today\'s weather and my to-dos', 'aria-label': 'Routine question', maxlength: 300 });
+  const add = () => {
+    const text = prompt.value.trim() || prompt.placeholder;
+    if (!time.value) return;
+    routines.add(time.value, text);
+    prompt.value = '';
+    toast(`Atoll will ask this every day at ${time.value}`);
+  };
+  prompt.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') add();
+  });
+  els.routineList = h('ul', { class: 'routine-list' });
+  paintRoutines();
+  return h('div', { class: 'card' },
+    h('h3', {}, 'Routines'),
+    h('p', { class: 'muted small' }, 'Asked by itself every day, with your weather and to-dos. Answers show up on the left.'),
+    h('div', { class: 'routine-add' }, time, prompt, iconButton('plus', 'Add routine', add)),
+    els.routineList);
 }
 
 // ---------- Ask
@@ -188,12 +232,17 @@ export const ask = {
           els.status, els.input,
           h('div', { class: 'row' }, h('label', { class: 'check-label' }, els.screen, icon('screen'), 'Include my screen'), h('span', { class: 'grow' }), h('small', { class: 'muted' }, 'Ctrl Enter'), els.voice, els.send),
           h('div', { class: 'answer-wrap' }, els.answer, iconButton('copy', 'Copy answer', () => navigator.clipboard.writeText(els.answer.textContent).then(() => toast('Copied')), { class: 'ghost corner' }))),
-        h('div', { class: 'card' },
-          h('h3', {}, 'Dictation'),
-          h('p', { class: 'muted small' }, 'Hold ', h('kbd', {}, 'Ctrl Shift D'), ' anywhere, talk, and let go. Atoll removes the ums, applies your corrections and types it where your cursor is.'),
-          hold, els.dictated),
+        h('div', { class: 'ask-side' },
+          h('div', { class: 'card' },
+            h('h3', {}, 'Dictation'),
+            h('p', { class: 'muted small' }, 'Hold ', h('kbd', {}, 'Ctrl Shift D'), ' anywhere, talk, and let go. Atoll removes the ums, applies your corrections and types it where your cursor is.'),
+            hold, els.dictated),
+          routineCard()),
       ),
     );
+    onChange(paintRoutines);
+    routines.onAnswer(showRoutineAnswer);
+    showRoutineAnswer();
     status();
   },
   show() {

@@ -9,6 +9,8 @@ const DEFAULTS = {
   wallpaperDay: '',
   todos: [],
   appLaunches: {},
+  routines: [],
+  routineAnswer: null,
 };
 
 let prefs = load();

@@ -57,7 +57,7 @@ A small pill sits at the top center of your screen, showing the time, the temper
 | **Clipboard** | Searchable history of text and images, with All/Text/Images/Pinned filters and a preview pane. **Enter** pastes into the app you were using, **Ctrl D** copies, **Ctrl P** pins and **Del** removes. Pinned items are never trimmed. |
 | **Apps** | Type a few letters and press Enter to launch. Finds Start Menu apps on Windows, `.app` bundles on macOS, and `.desktop` entries on Linux (including Flatpak and Snap). Apps you use most move to the front. |
 | **Wallpaper** | Eight original landscapes drawn by Atoll at your screen's exact resolution, an optional new one every day, or any image of your own. |
-| **Ask** | Type a question, or hold the mic button and ask it out loud, and optionally include your screen. **Ctrl Shift A** takes a screenshot of what you're looking at *before* the panel opens, so the answer is about your work, not about Atoll. |
+| **Ask** | Type a question, or hold the mic button and ask it out loud, and optionally include your screen. **Ctrl Shift A** takes a screenshot of what you're looking at *before* the panel opens, so the answer is about your work, not about Atoll. Routines ask a question by themselves every day at a set time, like "summarize today's weather and my to-dos" at 8:00. |
 | **Dictation** | Hold **Ctrl Shift D** anywhere, talk, and let go. Atoll removes filler words, applies spoken corrections ("Tuesday, no, Thursday") and types the clean text where your cursor is. Needs the Gemini option. |
 | **Settings** | AI provider and the assistant's personality, shortcuts (any key combination), clipboard size, weather city, °C or °F, and 12- or 24-hour time. |
 
@@ -105,7 +105,7 @@ This compares Atoll with Hitodama, the paid Windows island shown in a recent vir
 | Weather, week view, to-dos, timer | ✅ | ✅ |
 | Ask about your screen | ✅ whole screen, typed or spoken question | ✅ circle a region, spoken question |
 | Dictation that cleans up speech | ✅ | ✅ |
-| Routines and scheduled searches | ❌ not yet | ✅ |
+| Routines and scheduled searches | ✅ daily routines in the Ask tab | ✅ |
 | Custom assistant personality | ✅ | ✅ |
 
 ## Privacy
