@@ -262,3 +262,28 @@ textarea { resize: none; }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 4px; }
 ::-webkit-scrollbar-track { background: none; }
+
+/* ---------- Motion and finish */
+.view:not([hidden]) { animation: view-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.view:not([hidden]) .card { animation: view-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.view:not([hidden]) .card:nth-child(2) { animation-delay: 40ms; }
+.view:not([hidden]) .card:nth-child(3) { animation-delay: 80ms; }
+.view:not([hidden]) .card:nth-child(n+4) { animation-delay: 120ms; }
+@keyframes view-in { from { opacity: 0; transform: translateY(6px); } }
+.card { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 16px 34px -26px rgba(0, 0, 0, 0.9); }
+.tab, .btn, .icon-btn, .chip-btn, .link-btn { transition: background 0.2s, color 0.2s, border-color 0.2s, filter 0.2s, transform 0.12s; }
+.btn:active, .icon-btn:active, .chip-btn:active, .tab:active { transform: scale(0.97); }
+.btn.primary { box-shadow: 0 10px 22px -14px var(--moss); }
+.link-btn:hover { color: var(--text); }
+.switch { transition: background 0.2s; }
+.switch::after { transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35); }
+input[type=text], input[type=search], input[type=password], input[type=number], input[type=time], select, textarea { transition: border-color 0.2s, box-shadow 0.2s, background 0.2s; }
+input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea) 22%, transparent); }
+.search { transition: border-color 0.2s, box-shadow 0.2s; }
+.search:focus-within { border-color: var(--sea); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea) 22%, transparent); }
+:focus-visible { outline: 2px solid color-mix(in srgb, var(--sea) 80%, transparent); outline-offset: 2px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; }
+#toast { transition: opacity 0.25s, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6); }
+@media (prefers-reduced-motion: reduce) {
+  .view:not([hidden]), .view:not([hidden]) .card { animation: none; }
+}
