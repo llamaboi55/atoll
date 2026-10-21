@@ -19,18 +19,23 @@ Free and open source. No account, no ads, no paywall.
 
 ## Install
 
-**Download:** grab the installer for your system from [Releases](https://github.com/llamaboi55/atoll/releases):
+One command installs the latest version and opens it. Run the same command again to update.
 
-| System | File |
-|---|---|
-| Windows 10/11 | `Atoll_x.y.z_x64-setup.exe` (or the `.msi`) |
-| macOS 11+ (Apple silicon and Intel) | `Atoll_x.y.z_universal.dmg` |
-| Linux (Ubuntu 24.04+, Debian 13+, Fedora 40+ or similar) | `.AppImage`, `.deb` or `.rpm` |
+**Windows 10/11** (in PowerShell):
+```powershell
+irm https://raw.githubusercontent.com/llamaboi55/atoll/main/scripts/install.ps1 | iex
+```
 
-The builds aren't code-signed yet, because signing certificates cost money and Atoll is free. Here's what to do the first time you open it:
-- **Windows:** if SmartScreen appears, click *More info*, then *Run anyway*.
-- **macOS:** right-click Atoll in Applications, choose *Open*, then confirm. macOS may ask once for Accessibility (needed for media keys and paste) and Screen Recording (only if you use "Include my screen").
-- **Linux:** run `chmod +x Atoll*.AppImage` first. On Wayland, global shortcuts depend on your desktop. GNOME and KDE let you bind them in system settings to `atoll`, which opens or closes the island.
+**macOS 11+** (Apple silicon and Intel) **and Linux** (in Terminal):
+```sh
+curl -fsSL https://raw.githubusercontent.com/llamaboi55/atoll/main/scripts/install.sh | sh
+```
+
+You won't see a "Run anyway" or "unverified developer" prompt with these, because the files come straight from GitHub instead of through the browser. [install.ps1](scripts/install.ps1) installs for your user only, so it doesn't need admin rights. [install.sh](scripts/install.sh) installs to Applications on a Mac, and on Linux it uses apt (`.deb`), dnf or zypper (`.rpm`), or an AppImage in `~/.local/bin`. Both are short, so you can read them before you run them.
+
+The installers are also on the [Releases](https://github.com/llamaboi55/atoll/releases/latest) page if you'd rather download one yourself.
+
+On a Mac, Atoll asks once for Accessibility (needed for media keys and paste) and Screen Recording (only if you use "Include my screen"). On Linux with Wayland, global shortcuts depend on your desktop: GNOME and KDE let you bind a shortcut in system settings to `atoll`, which opens or closes the island.
 
 **Build it yourself in one command** (needs [Rust](https://rustup.rs) and Node.js 18+, plus the [Tauri system packages](https://v2.tauri.app/start/prerequisites/) on Linux):
 
@@ -52,9 +57,9 @@ A small pill sits at the top center of your screen, showing the time, the temper
 | **Clipboard** | Searchable history of text and images, with All/Text/Images/Pinned filters and a preview pane. **Enter** pastes into the app you were using, **Ctrl D** copies, **Ctrl P** pins and **Del** removes. Pinned items are never trimmed. |
 | **Apps** | Type a few letters and press Enter to launch. Finds Start Menu apps on Windows, `.app` bundles on macOS, and `.desktop` entries on Linux (including Flatpak and Snap). Apps you use most move to the front. |
 | **Wallpaper** | Eight original landscapes drawn by Atoll at your screen's exact resolution, an optional new one every day, or any image of your own. |
-| **Ask** | Ask a question and optionally include your screen. **Ctrl Shift A** takes a screenshot of what you're looking at *before* the panel opens, so the answer is about your work, not about Atoll. |
+| **Ask** | Type a question, or hold the mic button and ask it out loud, and optionally include your screen. **Ctrl Shift A** takes a screenshot of what you're looking at *before* the panel opens, so the answer is about your work, not about Atoll. Routines ask a question by themselves every day at a set time, like "summarize today's weather and my to-dos" at 8:00. |
 | **Dictation** | Hold **Ctrl Shift D** anywhere, talk, and let go. Atoll removes filler words, applies spoken corrections ("Tuesday, no, Thursday") and types the clean text where your cursor is. Needs the Gemini option. |
-| **Settings** | AI provider, shortcuts (any key combination), clipboard size, weather city, °C or °F, and 12- or 24-hour time. |
+| **Settings** | AI provider and the assistant's personality, shortcuts (any key combination), clipboard size, weather city, °C or °F, and 12- or 24-hour time. |
 
 Atoll is built with [Tauri 2](https://tauri.app): a Rust core with your system's own webview, so it doesn't ship a whole browser.
 
@@ -98,10 +103,10 @@ This compares Atoll with Hitodama, the paid Windows island shown in a recent vir
 | Wallpaper switcher | ✅ original generated art | ✅ |
 | Media and power controls | ✅ | ✅ |
 | Weather, week view, to-dos, timer | ✅ | ✅ |
-| Ask about your screen | ✅ whole screen, typed question | ✅ circle a region, spoken question |
+| Ask about your screen | ✅ whole screen, typed or spoken question | ✅ circle a region, spoken question |
 | Dictation that cleans up speech | ✅ | ✅ |
-| Routines and scheduled searches | ❌ not yet | ✅ |
-| Custom assistant personality | ❌ | ✅ |
+| Routines and scheduled searches | ✅ daily routines in the Ask tab | ✅ |
+| Custom assistant personality | ✅ | ✅ |
 
 ## Privacy
 
@@ -123,7 +128,8 @@ src-tauri/src/        Rust core
   ai.rs               Gemini and Ollama, screen capture
   window.rs           pill and panel sizing at the top of the screen
   config.rs           settings file
-.github/workflows/    tests on all three systems, and installers on every version tag
+.github/workflows/    tests on all three systems, and a published release whenever the version changes
+scripts/install.*     one-command installers
 ```
 
 Run the tests with `npm test`. Issues and ideas are welcome.

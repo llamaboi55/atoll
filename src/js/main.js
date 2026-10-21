@@ -3,6 +3,7 @@ import { call, listen, native } from './api.js';
 import { get, onChange } from './prefs.js';
 import { weather, onWeather, refresh as refreshWeather } from './weather.js';
 import * as timer from './timer.js';
+import * as routines from './routines.js';
 import { sceneDataUrl } from './scenes.js';
 import { today } from './tabs/today.js';
 import { controls } from './tabs/controls.js';
@@ -100,6 +101,11 @@ timer.onDone(() => {
   pill.classList.add('ping');
   setTimeout(() => pill.classList.remove('ping'), 3000);
 });
+routines.onAnswer((a) => {
+  toast(a.error ? 'A routine couldn\'t get an answer. See the Ask tab.' : 'Your routine answered. Open Ask to read it.');
+  pill.classList.add('ping');
+  setTimeout(() => pill.classList.remove('ping'), 3000);
+});
 
 // Keyboard
 document.addEventListener('keydown', (e) => {
@@ -126,6 +132,7 @@ listen('atoll://clip', (clip) => clipboard.add(clip));
 paintPill();
 refreshWeather();
 applyDailyWallpaper();
+routines.start();
 
 // Preview helpers for screenshots: ?open=stats etc.
 if (params.has('open')) expand(params.get('open'));

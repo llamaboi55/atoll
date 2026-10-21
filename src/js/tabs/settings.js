@@ -19,6 +19,7 @@ async function load() {
   els.geminiModel.value = cfg.gemini_model;
   els.ollamaUrl.value = cfg.ollama_url;
   els.ollamaModel.value = cfg.ollama_model;
+  els.personality.value = cfg.ai_personality || '';
   els.toggle.value = cfg.toggle_shortcut;
   els.ask.value = cfg.ask_shortcut;
   els.dictate.value = cfg.dictate_shortcut;
@@ -40,6 +41,7 @@ async function save(clearKey = false) {
     gemini_model: els.geminiModel.value.trim() || 'gemini-2.5-flash',
     ollama_url: els.ollamaUrl.value.trim() || 'http://localhost:11434',
     ollama_model: els.ollamaModel.value.trim() || 'gemma3',
+    ai_personality: els.personality.value.trim(),
     toggle_shortcut: els.toggle.value.trim(),
     ask_shortcut: els.ask.value.trim(),
     dictate_shortcut: els.dictate.value.trim(),
@@ -67,6 +69,7 @@ export const settings = {
       geminiModel: h('input', { type: 'text' }),
       ollamaUrl: h('input', { type: 'text' }),
       ollamaModel: h('input', { type: 'text' }),
+      personality: h('textarea', { rows: 2, maxlength: 500, placeholder: 'e.g. dry and funny, or answer in Spanish' }),
       toggle: h('input', { type: 'text' }),
       ask: h('input', { type: 'text' }),
       dictate: h('input', { type: 'text' }),
@@ -116,6 +119,7 @@ export const settings = {
     view.append(
       h('div', { class: 'settings-grid' },
         h('div', { class: 'card' }, h('h3', {}, 'AI (optional)'), field('Provider', els.provider), els.gemini, els.ollama,
+          field('Personality', els.personality, 'How Atoll should talk to you. Leave empty for calm and brief.'),
           h('p', { class: 'muted small' }, 'Nothing is sent anywhere unless you ask a question or dictate.')),
         h('div', { class: 'card' }, h('h3', {}, 'Shortcuts'),
           field('Open / close', els.toggle), field('Ask about my screen', els.ask), field('Hold to dictate', els.dictate),

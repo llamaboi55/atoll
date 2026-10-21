@@ -1,9 +1,12 @@
-# Push a tag like v1.0.0 to build installers for Windows, macOS and Linux.
-# They land in a draft release so you can check them before publishing.
+# Builds installers for Windows, macOS and Linux and publishes them as a GitHub release.
+# Runs when the version in tauri.conf.json changes on main (the release is tagged
+# v<version> automatically), or by hand from the Actions tab.
 name: Release
 on:
   push:
-    tags: ['v*']
+    branches: [main]
+    paths: ['src-tauri/tauri.conf.json']
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -43,8 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: Atoll ${{ github.ref_name }}
-          releaseBody: Download the file for your system below. See the README for first-launch notes.
-          releaseDraft: true
+          tagName: v__VERSION__
+          releaseName: Atoll v__VERSION__
+          releaseBody: The easiest way to install is the one-command install in the README, which needs no security prompts. Or download the file for your system below.
+          releaseDraft: false
           args: ${{ matrix.args }}

@@ -82,6 +82,17 @@ async fn ollama(config: &Config, prompt: &str, image: Option<&str>) -> Result<St
 
 const SYSTEM: &str = "You are Atoll, a calm desktop assistant. Answer briefly and plainly (under 120 words unless asked). If a screenshot is attached, it shows the user's screen.";
 
+/// The base instructions plus the personality the user chose in settings, if any.
+pub fn system_prompt(config: &Config) -> String {
+    let personality = config.ai_personality.trim();
+    if personality.is_empty() {
+        SYSTEM.to_string()
+    } else {
+        let personality: String = personality.chars().take(500).collect();
+        format!("{SYSTEM}\nThe user chose this personality and style for you, so follow it: {personality}")
+    }
+}
+
 #[tauri::command]
 pub async fn ai_ask(
     config: tauri::State<'_, ConfigStore>,
@@ -99,7 +110,7 @@ pub async fn ai_ask(
     } else {
         None
     };
-    let full = format!("{SYSTEM}\n\n{prompt}");
+    let full = format!("{}\n\n{prompt}", system_prompt(&config));
     match config.ai_provider.as_str() {
         "gemini" => {
             let mut parts = vec![json!({ "text": full })];
@@ -135,5 +146,16 @@ mod tests {
         let body = json!({ "candidates": [{ "content": { "parts": [{ "text": "Hello " }, { "text": "world " }] } }] });
         assert_eq!(extract_gemini_text(&body), "Hello world");
         assert_eq!(extract_gemini_text(&json!({})), "");
+    }
+
+    #[test]
+    fn adds_personality_only_when_set() {
+        let mut config = Config::default();
+        assert_eq!(system_prompt(&config), SYSTEM);
+        config.ai_personality = "  dry and funny ".into();
+        let p = system_prompt(&config);
+        assert!(p.starts_with(SYSTEM) && p.ends_with("dry and funny"));
+        config.ai_personality = "x".repeat(2000);
+        assert!(system_prompt(&config).len() < SYSTEM.len() + 600);
     }
 }

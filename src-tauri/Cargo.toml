@@ -1,6 +1,6 @@
 [package]
 name = "atoll"
-version = "1.0.0"
+version = "1.1.0"
 description = "A calm island at the top of your screen. Free and open source."
 authors = ["Chipper-AOS"]
 license = "MIT"

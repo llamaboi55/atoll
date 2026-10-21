@@ -77,7 +77,7 @@ kbd { font: 11px/1 ui-monospace, monospace; padding: 2px 5px; border-radius: 5px
 .card { background: var(--glass-2); border: 1px solid var(--line); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
 .card.full { height: 100%; }
 h3 { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-input[type=text], input[type=search], input[type=password], input[type=number], select, textarea {
+input[type=text], input[type=search], input[type=password], input[type=number], input[type=time], select, textarea {
   width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); background: rgba(0, 0, 0, 0.25); outline: none;
 }
 input:focus, select:focus, textarea:focus { border-color: var(--sea); }
@@ -237,6 +237,16 @@ textarea { resize: none; }
 .answer { flex: 1; overflow-y: auto; white-space: pre-wrap; padding: 12px 36px 12px 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.25); font-size: 14px; line-height: 1.55; user-select: text; }
 .answer.small { font-size: 13px; padding-right: 12px; flex: 1; }
 .corner { position: absolute; top: 6px; right: 6px; }
+.ask-side { display: flex; flex-direction: column; gap: 12px; min-height: 0; overflow-y: auto; }
+.ask-side .card { flex: none; }
+.ask-side .answer.small { min-height: 44px; }
+.routine-add { display: flex; gap: 6px; align-items: center; }
+.routine-add input[type='text'] { flex: 1; min-width: 0; }
+.routine-add input[type='time'] { width: 126px; flex: none; color-scheme: dark; }
+.routine-list { list-style: none; margin: 0; padding: 0; }
+.routine-list li { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 13px; }
+.routine-list .time { font-variant-numeric: tabular-nums; color: var(--moss); }
+.routine-list .grow { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hold { justify-content: center; padding: 14px; border-radius: 16px; font-weight: 600; touch-action: none; }
 .hold.live { background: rgba(255, 122, 92, 0.2); border-color: #ff7a5c; color: #ffd2c6; }
 
